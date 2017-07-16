@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.3"
     defaultConfig {
         applicationId "com.fortest.elice.fortest"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -19,12 +19,34 @@ android {
     }
 }
 
+ext {
+    supportLibraryVersion = '25.3.1'
+    constraintVersion = '1.0.2'
+    rxAndroidVersion = '1.2.1'
+    retrofit2Version = '2.1.0'
+    okhttpVersion = '3.4.1'
+    glideVersion = '3.8.0'
+    butterknifeVersion = '8.7.0'
+    chunckVersion = '1.0.4'
+    junitVersion = '4.12'
+
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
+    compile "com.android.support:appcompat-v7:${supportLibraryVersion}"
+    compile "com.android.support.constraint:constraint-layout:${constraintVersion}"
+    compile "com.android.support:design:${supportLibraryVersion}"
+    compile "io.reactivex:rxandroid:${rxAndroidVersion}"
+    compile "com.squareup.retrofit2:converter-gson:${retrofit2Version}"
+    compile "com.squareup.retrofit2:adapter-rxjava:${retrofit2Version}"
+    compile "com.squareup.retrofit2:retrofit:${retrofit2Version}"
+    compile "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}"
+    compile "com.squareup.okhttp3:okhttp:${okhttpVersion}"
+    compile "com.github.bumptech.glide:glide:${glideVersion}"
+    compile "com.jakewharton:butterknife:${butterknifeVersion}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${butterknifeVersion}"
+    debugCompile "com.readystatesoftware.chuck:library:${chunckVersion}"
+    releaseCompile "com.readystatesoftware.chuck:library-no-op:${chunckVersion}"
+    testCompile "junit:junit:${junitVersion}"
 }
