@@ -13,7 +13,7 @@ import butterknife.ButterKnife;
  * Created by elice.kim on 2017. 7. 16..
  */
 
-public class RepoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

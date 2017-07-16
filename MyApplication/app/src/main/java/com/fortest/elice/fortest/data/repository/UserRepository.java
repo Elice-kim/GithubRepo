@@ -13,6 +13,8 @@ import rx.Observable;
 public interface UserRepository {
 
     @GET("users/{username}")
-    Observable<UserDTO> getUserInfo(@Path("username") String username);
+    Observable<UserDTO.UserInfoResponse> getUserInfo(@Path("username") String userName);
 
+    @GET("users/{username}/repos")
+    Observable<UserDTO.UserRepoResponse> getUserRepository(@Path("username") String userName);
 }
