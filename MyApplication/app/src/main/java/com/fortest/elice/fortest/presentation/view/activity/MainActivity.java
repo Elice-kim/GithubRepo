@@ -1,9 +1,10 @@
-package com.fortest.elice.fortest;
+package com.fortest.elice.fortest.presentation.view.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.fortest.elice.fortest.R;
+
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
