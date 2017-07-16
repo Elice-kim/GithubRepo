@@ -7,5 +7,4 @@ package com.fortest.elice.fortest.data.net;
 public interface EliceConfig {
 
     String BASE_URL = "https://api.github.com/";
-    int INIT_PAGE_NO = 1;
 }

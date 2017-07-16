@@ -14,6 +14,7 @@ import com.fortest.elice.fortest.presentation.view.adapter.UserAdapter;
 import java.util.List;
 
 import butterknife.BindView;
+import rx.Subscription;
 
 public class MainActivity extends BaseActivity {
 
@@ -48,5 +49,14 @@ public class MainActivity extends BaseActivity {
 
     public void onFail() {
         Toast.makeText(this, "유저 정보를 불러오는데 실패하였습니다", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Subscription subscription = presenter.getSubscription();
+        if (subscription != null && !subscription.isUnsubscribed()) {
+            subscription.unsubscribe();
+        }
+        super.onDestroy();
     }
 }

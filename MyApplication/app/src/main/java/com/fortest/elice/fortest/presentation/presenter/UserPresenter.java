@@ -23,10 +23,11 @@ public class UserPresenter extends BasePresenter<MainActivity> {
     }
 
     public void loadImgList(String userName) {
-        subscription = Observable.zip(userRepository.getUserInfo(userName),
-                userRepository.getUserRepository(userName),
+        subscription = Observable.zip(userRepository.getUserInfo(userName).subscribeOn(Schedulers.io()),
+                userRepository.getUserRepository(userName).subscribeOn(Schedulers.io()),
                 (UserDTO.UserInfoResponse userInfoResponse, List<UserDTO.UserRepoResponse> userRepoResponse)
-                        -> new UserInfoZipItem(userInfoResponse, userRepoResponse)).subscribeOn(Schedulers.io())
+                        -> new UserInfoZipItem(userInfoResponse, userRepoResponse))
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(() -> view.showLoading())
                 .doOnTerminate(() -> view.hideLoading())

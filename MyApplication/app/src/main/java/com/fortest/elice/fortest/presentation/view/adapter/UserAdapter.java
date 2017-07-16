@@ -14,7 +14,6 @@ import com.fortest.elice.fortest.data.dto.UserDTO;
 import com.fortest.elice.fortest.util.CollectionUtil;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import butterknife.BindView;
@@ -40,10 +39,12 @@ public class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == USER_INFO_VIEW_TYPE) {
-            View userInfoView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_user_information, parent, false);
+            View userInfoView = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.item_user_information, parent, false);
             return new UserViewHolder(userInfoView);
         } else {
-            View userRepositoryView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_user_repository, parent, false);
+            View userRepositoryView = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.item_user_repository, parent, false);
             return new RepositoryViewHolder(userRepositoryView);
         }
     }
@@ -56,6 +57,7 @@ public class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             userViewHolder.userNameTextView.setText(userInfoResponse.name);
         } else {
             RepositoryViewHolder repositoryViewHolder = (RepositoryViewHolder) holder;
+            //상위 userInfo 레이아웃 때문에 해당 레이아웃의 position은 1부터 시작함으로 -1을 한다.
             UserDTO.UserRepoResponse userRepoResponse = this.userRepoResponse.get(position - 1);
             repositoryViewHolder.repoNameTextView.setText(userRepoResponse.name);
             repositoryViewHolder.repoDescTextView.setText(userRepoResponse.description);
@@ -65,7 +67,7 @@ public class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        if (userRepoResponse == null) {
+        if (CollectionUtil.isEmpty(userRepoResponse)) {
             return 0;
         }
         // userInfo 정보 layout 때문에 +1
@@ -86,12 +88,7 @@ public class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             return;
         }
         this.userInfoResponse = userInfoResponse;
-        Collections.sort(userRepoResponse, new Comparator<UserDTO.UserRepoResponse>() {
-            @Override
-            public int compare(UserDTO.UserRepoResponse o1, UserDTO.UserRepoResponse o2) {
-                return o1.stargazersCount > o2.stargazersCount ? -1 : 1;
-            }
-        });
+        Collections.sort(userRepoResponse, (o1, o2) -> o1.stargazersCount > o2.stargazersCount ? -1 : 1);
         this.userRepoResponse = userRepoResponse;
         notifyDataSetChanged();
     }
