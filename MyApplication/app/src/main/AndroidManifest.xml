@@ -14,11 +14,17 @@
         <activity android:name=".presentation.view.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="deeplink"
+                    android:scheme="elice" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.view.activity.LinkActivity"></activity>
     </application>
 
 </manifest>

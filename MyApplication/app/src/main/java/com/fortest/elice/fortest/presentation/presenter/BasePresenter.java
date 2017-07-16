@@ -13,4 +13,7 @@ public class BasePresenter<VIEW> {
         this.view = view;
     }
 
+    public Subscription getSubscription() {
+        return subscription;
+    }
 }
